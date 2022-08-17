@@ -16,7 +16,7 @@ jobs:
       - name: 🔨 Build Project
         run: |
           npm install
-          npm run build
+          npm run production
 
       - name: install composer
         uses: ramsey/composer-install@v2
@@ -27,7 +27,7 @@ jobs:
         uses: SpicyPizza/create-envfile@v1.3
         with:
           envkey_APP_NAME: Laravel
-          envkey_APP_KEY: base64:GkQc8HDlfsxjaxR9mdrYfi2FgwkGHn+WSCoC3Ohh+zc:
+          envkey_APP_KEY: base64:GkQc8HDlfsxjaxR9mdrYfi2FgwkGHn+WSCoC3Ohh+zc=
           envkey_DB_CONNECTION: mysql
           envkey_DB_HOST: mysql79.hostland.ru
           envkey_DB_PORT: 3306
@@ -36,6 +36,7 @@ jobs:
           envkey_DB_PASSWORD: ESizyKvs3T
           file_name: .env
           fail_on_empty: false
+
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:

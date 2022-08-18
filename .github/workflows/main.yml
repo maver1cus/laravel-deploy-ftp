@@ -29,21 +29,21 @@ jobs:
           envkey_APP_NAME: Laravel
           envkey_APP_KEY: base64:GkQc8HDlfsxjaxR9mdrYfi2FgwkGHn+WSCoC3Ohh+zc=
           envkey_DB_CONNECTION: mysql
-          envkey_DB_HOST: mysql79.hostland.ru
+          envkey_DB_HOST: h202860128.mysql
           envkey_DB_PORT: 3306
-          envkey_DB_DATABASE: host1848044
-          envkey_DB_USERNAME: host1848044
-          envkey_DB_PASSWORD: ESizyKvs3T
+          envkey_DB_DATABASE: h202860128_db
+          envkey_DB_USERNAME: h202860128_mysql
+          envkey_DB_PASSWORD: irXXPS4/
           file_name: .env
           fail_on_empty: false
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
-          server: ftp79.hostland.ru
-          username: host1848044
+          server: ftp.h202860128.nichost.ru
+          username: h202860128_ftp
           password: ${{ secrets.password }}
-          server-dir: host1848044.hostland.pro/htdocs/www/
+          server-dir: h202860128.nichost.ru/docs/
           exclude: |
             **/.git*
             **/.git*/**

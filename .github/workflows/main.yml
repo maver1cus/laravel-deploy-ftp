@@ -13,4 +13,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          script: "cd /var/www/html && ./.scripts/deploy.sh"
+          script: "cd /home/h202860128/h202860128.nichost.ru/docs && ./.scripts/deploy.sh"

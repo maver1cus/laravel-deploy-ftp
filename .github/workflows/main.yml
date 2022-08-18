@@ -24,6 +24,4 @@ jobs:
             php artisan optimize
             npm install
             npm run prod
-            php artisan migrate --force
-            php artisan up
             echo "Deployment finished!"

@@ -1,50 +1,27 @@
-on: push
-name: 🚀 Deploy website on push
+name: Deploy
+
+# Trigger the workflow on push and
+# pull request events on the production branch
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# Authenticate to the the server via ssh
+# and run our deployment script
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v2
-
-      - name: Use Node.js 14
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v2
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
         with:
-          node-version: "14"
-
-      - name: 🔨 Build Project
-        run: |
-          npm install
-          npm run production
-
-      - name: install composer
-        uses: ramsey/composer-install@v2
-        with:
-          dependency-versions: "lowest"
-
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v1.3
-        with:
-          envkey_APP_NAME: Laravel
-          envkey_APP_KEY: base64:GkQc8HDlfsxjaxR9mdrYfi2FgwkGHn+WSCoC3Ohh+zc=
-          envkey_DB_CONNECTION: mysql
-          envkey_DB_HOST: h202860128.mysql
-          envkey_DB_PORT: 3306
-          envkey_DB_DATABASE: h202860128_db
-          envkey_DB_USERNAME: h202860128_mysql
-          envkey_DB_PASSWORD: irXXPS4/
-          file_name: .env
-          fail_on_empty: false
-
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
-        with:
-          server: ftp.h202860128.nichost.ru
-          username: h202860128_ftp
-          password: ${{ secrets.password }}
-          server-dir: h202860128.nichost.ru/docs/
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSHKEY }}
+          script: "cd /var/www/html && ./.scripts/deploy.sh"
